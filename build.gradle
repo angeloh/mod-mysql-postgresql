@@ -1,4 +1,5 @@
 apply from: "gradle/vertx.gradle"
+apply plugin: "ivy-publish"
 
 /*
 Usage:
@@ -48,6 +49,12 @@ install - install any jars produced to the local Maven repository (.m2)
 
  */
 
+repositories {
+  ivy {
+      artifactPattern "http://angeloh.bitbucket.org/releases/[organisation]/[module]/[revision]/[artifact](-[revision]).[ext]"
+  }
+}
+
 dependencies {
   /*
   Add your module jar dependencies here
@@ -77,6 +84,22 @@ test {
   exclude 'org/boo/**'
   */
 
+}
+
+publishing {
+    publications {
+        ivy(IvyPublication) {
+            organisation "$modowner"
+            module "$modname"
+            revision "$version"
+            from components.java
+        }
+    }
+    repositories {
+        ivy {
+            url "$ivypath"
+        }
+    }
 }
 
 /*

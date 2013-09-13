@@ -50,8 +50,8 @@ install - install any jars produced to the local Maven repository (.m2)
  */
 
 repositories {
-  ivy {
-      artifactPattern "http://angeloh.bitbucket.org/releases/[organisation]/[module]/[revision]/[artifact](-[revision]).[ext]"
+  maven {
+      url 'http://angeloh.bitbucket.org/releases/'
   }
 }
 
